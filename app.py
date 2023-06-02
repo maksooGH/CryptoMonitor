@@ -3,20 +3,21 @@ import src.utls as utls
 
 def main():
     Stocks = [
-        {"ticker":"BTC-USD"},
-        {"ticker":"ETH-USD"},
-        {"ticker":"AAPL"},
-        {"ticker":"TSLA"},
-        {"ticker":"META"},
+        {"Ticker":"BTC-USD"},
+        {"Ticker":"ETH-USD"},
+        {"Ticker":"AAPL"},
+        {"Ticker":"TSLA"},
+        {"Ticker":"META"},
     ]
     #utls.wait_for_next_round_hour()
-    logic.get_current_percentage(Stocks)
+    Stocks = logic.get_current_percentage(Stocks)
+    print(Stocks)
     return
     while True:
         
         
         for stock in Stocks:
-            change, last = get_last_price(stock['ticker'])
+            change, last = get_last_price(stock['Ticker'])
             stock['change'] = change
             stock['last'] = last
         Stocks = sort_dict_list_by_change(Stocks)
