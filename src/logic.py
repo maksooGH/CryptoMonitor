@@ -3,8 +3,8 @@ import numpy
 import src.utls as utls
 
 
-def get_tickers_data():
-    data = yf.download("AAPL, META", period="2d", interval="1h")
+def get_tickers_data(tickers_list):
+    data = yf.download(tickers_list, period="2d", interval="1h")
     return data
     print(data['Close', 'BTC-USD'])
     for ticker in tickers:
@@ -19,5 +19,5 @@ def calculate_percentage(data):
 
 def get_current_percentage(ticker_dict):
     ticker_list = utls.get_ticker_list(ticker_dict)
-    s = get_tickers_data()
+    s = get_tickers_data(ticker_list)
     print(calculate_percentage(s)['Percentage'])
