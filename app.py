@@ -5,7 +5,7 @@ import time
 
 def main():
     #os.system('cls')
-
+    #utls.filter_bad_tickers()
     Stocks = utls.read_tickers_from_file()
     if len(Stocks) == 0:
         return

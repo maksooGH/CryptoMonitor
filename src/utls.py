@@ -43,3 +43,22 @@ def read_tickers_from_file():
     stocks = [{"Ticker":x} for x in tickers]
     # 5. return list
     return stocks
+
+
+def filter_bad_tickers(tickers_file="tickers.txt", bad_file="bad.txt"):
+    # Read the tickers from the "tickers.txt" file
+    with open(tickers_file, "r") as file:
+        tickers = [line.strip() for line in file]
+
+    # Read the bad tickers from the "bad.txt" file
+    with open(bad_file, "r") as file:
+        bad_lines = [line.strip() for line in file]
+        bad_tickers = [line.split(":")[0][2:] for line in bad_lines]  # split each line by ":", take the ticker part and remove leading dash and space
+
+    # Remove the bad tickers from the list of tickers
+    tickers = [ticker for ticker in tickers if ticker not in bad_tickers]
+
+    # Write the good tickers back to the "tickers.txt" file
+    with open(tickers_file, "w") as file:
+        for ticker in tickers:
+            file.write(ticker + "\n")

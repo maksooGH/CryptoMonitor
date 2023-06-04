@@ -32,3 +32,4 @@ def sort_dict_list_by_change(dict_list):
 
 def get_ticker_list(dict_list):
     return [d['Ticker'] for d in dict_list]
+
