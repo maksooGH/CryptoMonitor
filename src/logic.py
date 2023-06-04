@@ -21,8 +21,9 @@ def get_current_percentage(ticker_dict):
     candle_date = s.iloc[-2].name.strftime("%H:%M:%S %d.%m.%Y")
     for ticker in ticker_dict:
         percentage_to_dict = round(s['Percentage', ticker['Ticker']].iloc[-2], 2)
-        ticker['LastChange'] = f'{percentage_to_dict} %'
+        ticker['LastChange'] = percentage_to_dict
         ticker['LastCheckTime'] = candle_date
+    ticker_dict = sort_dict_list_by_change(ticker_dict)
     return ticker_dict
 
 def sort_dict_list_by_change(dict_list):
