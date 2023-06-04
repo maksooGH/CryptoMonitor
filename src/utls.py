@@ -20,7 +20,7 @@ def wait_for_next_check_hour():
 
 def print_matching(dict_list):   
     for x in dict_list:
-        if abs(x['LastChange'])>0.05:
+        if abs(x['LastChange'])>0.5:
             change = x['LastChange']
             print(x['Ticker'], f'{change}%')
 
