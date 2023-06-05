@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 
 import src.utls as utls
 
@@ -11,12 +12,16 @@ def prepare_and_send_webhooks(data, gainers_webhook_url=urlGainers, losers_webho
     losers = [d for d in data if d['LastChange'] < -0.75]
     losers = utls.sort_dict_list_asc(losers)
     gainers = utls.sort_dict_list_desc(gainers)
+
+    timestamp = datetime.utcnow().isoformat()
+
     gainers_embed = {
        
         "embeds": [{
             "title": "Last 1h - Top Gainers",
             "description": "\n".join([f"{g['Ticker']} ({g['LastChange']}%)" for g in gainers]),
-            "color": 65280
+            "color": 65280,
+            "timestamp": timestamp
         }]
     }
 
@@ -25,7 +30,8 @@ def prepare_and_send_webhooks(data, gainers_webhook_url=urlGainers, losers_webho
         "embeds": [{
             "title": "Last 1h - Top Losers",
             "description": "\n".join([f"{l['Ticker']} ({l['LastChange']}%)" for l in losers]),
-            "color": 16711680
+            "color": 16711680,
+            "timestamp": timestamp
         }]
     }
 
