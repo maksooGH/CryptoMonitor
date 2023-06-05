@@ -12,11 +12,11 @@ def main():
     
     while True:
         utls.wait_for_next_check_hour()
+        time.sleep(60)
         print("Checking stocks' percentage change...")
         Stocks = logic.get_current_percentage(Stocks)
         print("Successfully checked stocks!")
         utls.print_matching(Stocks)
-
 
 if __name__ == '__main__':
     main()
