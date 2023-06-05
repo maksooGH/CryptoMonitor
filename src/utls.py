@@ -25,32 +25,32 @@ def print_matching(dict_list):
             print(x['Ticker'], f'{change}%')
 
 def read_tickers_from_file():
-    # 1. Check if file named "tickers.txt" is in app dir, if no create it
-    filename = "tickers.txt"
+    # 1. Check if file named "data/tickers.txt" is in app dir, if no create it
+    filename = "data/tickers.txt"
     if not os.path.exists(filename):
         open(filename, 'w', encoding='utf-8').close() # this creates an empty file
-        print('Add tickers to "tickers.txt" file to continue')
+        print('Add tickers to "data/tickers.txt" file to continue')
         return [] # we close program (by returning from function)
     
     # 2. Read this file and create list of string with individual tickers
     with open(filename, 'r',encoding='utf-8') as file:
         tickers = [line.strip() for line in file] # read lines and remove newline characters
 
-    # 4. If list is empty print "Add tickers to "tickers.txt" file to continue" and close program
+    # 4. If list is empty print "Add tickers to "data/tickers.txt" file to continue" and close program
     if not tickers:
-        print('Add tickers to "tickers.txt" file to continue')
+        print('Add tickers to "data/tickers.txt" file to continue')
         return [] # we close program (by returning from function)
     stocks = [{"Ticker":x} for x in tickers]
     # 5. return list
     return stocks
 
 
-def filter_bad_tickers(tickers_file="tickers.txt", bad_file="bad.txt"):
-    # Read the tickers from the "tickers.txt" file
+def filter_bad_tickers(tickers_file="data/tickers.txt", bad_file="data/bad.txt"):
+    # Read the tickers from the "data/tickers.txt" file
     with open(tickers_file, "r") as file:
         tickers = [line.strip() for line in file]
 
-    # Read the bad tickers from the "bad.txt" file
+    # Read the bad tickers from the "data/bad.txt" file
     with open(bad_file, "r") as file:
         bad_lines = [line.strip() for line in file]
         bad_tickers = [line.split(":")[0][2:] for line in bad_lines]  # split each line by ":", take the ticker part and remove leading dash and space
@@ -58,7 +58,7 @@ def filter_bad_tickers(tickers_file="tickers.txt", bad_file="bad.txt"):
     # Remove the bad tickers from the list of tickers
     tickers = [ticker for ticker in tickers if ticker not in bad_tickers]
 
-    # Write the good tickers back to the "tickers.txt" file
+    # Write the good tickers back to the "data/tickers.txt" file
     with open(tickers_file, "w") as file:
         for ticker in tickers:
             file.write(ticker + "\n")

@@ -26,7 +26,7 @@ def get_current_percentage(ticker_dict):
         percentage_to_dict = round(s['Percentage', ticker['Ticker']].iloc[-2], 2)
         ticker['LastChange'] = percentage_to_dict
         ticker['LastCheckTime'] = candle_date
-    ticker_dict = utls.sort_dict_list_by_desc(ticker_dict)
+    ticker_dict = utls.sort_dict_list_desc(ticker_dict)
     return ticker_dict
 
 
