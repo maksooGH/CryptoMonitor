@@ -22,6 +22,7 @@ def get_current_percentage(ticker_dict):
     s = get_tickers_data(ticker_list)
     s = calculate_percentage(s)
     candle_date = s.iloc[-2].name.strftime("%H:%M:%S %d.%m.%Y")
+    print("Datetime: ",candle_date)
     for ticker in ticker_dict:
         percentage_to_dict = round(s['Percentage', ticker['Ticker']].iloc[-2], 2)
         ticker['LastChange'] = percentage_to_dict
