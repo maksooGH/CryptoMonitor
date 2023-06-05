@@ -4,13 +4,12 @@ import os
 
 def wait_for_next_check_hour():
     current_time = datetime.datetime.now()
-    if current_time.minute < 30:
-        next_time = current_time.replace(minute=30, second=0, microsecond=0)
-    else:
-        next_hour = (current_time + datetime.timedelta(hours=1)).hour
-        if next_hour == 0:
-            next_hour = 24
-        next_time = current_time.replace(hour=next_hour, minute=0, second=0, microsecond=0)
+    #if current_time.minute < 30:
+  #      next_time = current_time.replace(minute=30, second=0, microsecond=0)
+   # else:
+    next_hour = (current_time + datetime.timedelta(hours=1)).hour
+    
+    next_time = current_time.replace(hour=next_hour, minute=0, second=0, microsecond=0)
 
     time_to_wait = (next_time - current_time).total_seconds()
     as_min = round(time_to_wait/60, 2)
@@ -63,3 +62,11 @@ def filter_bad_tickers(tickers_file="tickers.txt", bad_file="bad.txt"):
     with open(tickers_file, "w") as file:
         for ticker in tickers:
             file.write(ticker + "\n")
+
+def sort_dict_list_desc(dict_list):
+    sorted_list = sorted(dict_list, key=lambda x: x['LastChange'], reverse=True)
+    return sorted_list
+
+def sort_dict_list_asc(dict_list):
+    sorted_list = sorted(dict_list, key=lambda x: x['LastChange'], reverse=False)
+    return sorted_list

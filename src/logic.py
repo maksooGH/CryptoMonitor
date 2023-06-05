@@ -1,7 +1,10 @@
 import yfinance as yf
 import numpy
-import src.utls as utls
 import pandas as pd
+
+
+import src.utls as utls
+
 
 
 def get_tickers_data(tickers_list):
@@ -23,12 +26,10 @@ def get_current_percentage(ticker_dict):
         percentage_to_dict = round(s['Percentage', ticker['Ticker']].iloc[-2], 2)
         ticker['LastChange'] = percentage_to_dict
         ticker['LastCheckTime'] = candle_date
-    ticker_dict = sort_dict_list_by_change(ticker_dict)
+    ticker_dict = utls.sort_dict_list_by_desc(ticker_dict)
     return ticker_dict
 
-def sort_dict_list_by_change(dict_list):
-    sorted_list = sorted(dict_list, key=lambda x: x['LastChange'], reverse=True)
-    return sorted_list
+
 
 def get_ticker_list(dict_list):
     return [d['Ticker'] for d in dict_list]
