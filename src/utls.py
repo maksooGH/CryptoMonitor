@@ -15,6 +15,8 @@ def wait_for_next_check_hour():
     as_min = round(time_to_wait/60, 2)
     print(f'Waiting {as_min} minutes...')
     time.sleep(time_to_wait)
+    print(f'Waiting 200 seconds more...')
+    time.sleep(200)
     # Optional: Print a message once the waiting is over
     #print("Next half-hour has arrived!")
 
